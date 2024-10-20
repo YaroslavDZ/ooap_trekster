@@ -86,6 +86,34 @@ Trekster - простий та зручний додаток для веденн
 - **Аутентифікація:** Двофакторна аутентифікація для авторизованих користувачів.
 - **Бекап даних:** Автоматичне створення локальних бекапів для запобігання втраті даних.
 
+# High level architecture diagram
+
+<p align="center">
+	<img src="https://github.com/yvoznyak/ooap_trekster/blob/main/High%20level%20architecture%20diagram/trekster_architecture.png" alt="High-level Architecture" height="650"/>
+</p>
+
+# Concurency Patterns usage
+
+<p align="center">
+	<img src="https://github.com/yvoznyak/ooap_trekster/blob/main/Concurency%20Patterns%20usage/add_transaction.png" alt="Concurency Patterns usage" height="450"/>
+</p>
+
+<p align="center">
+	<img src="https://github.com/yvoznyak/ooap_trekster/blob/main/Concurency%20Patterns%20usage/edit_account.png" alt="Concurency Patterns usage" height="450"/>
+</p>
+
+<p align="center">
+	<img src="https://github.com/yvoznyak/ooap_trekster/blob/main/Concurency%20Patterns%20usage/manage_categories.png" alt="Concurency Patterns usage" height="450"/>
+</p>
+
+<p align="center">
+	<img src="https://github.com/yvoznyak/ooap_trekster/blob/main/Concurency%20Patterns%20usage/user_authorization.png" alt="Concurency Patterns usage" height="450"/>
+</p>
+
+<p align="center">
+	<img src="https://github.com/yvoznyak/ooap_trekster/blob/main/Concurency%20Patterns%20usage/view_reports.png" alt="Concurency Patterns usage" height="450"/>
+</p>
+
 # Система управління акаунтами
 
 | Use case          | Опис                                                   |

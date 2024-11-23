@@ -153,7 +153,7 @@
 
 ## Security model
 
-**<a href="https://github.com/yvoznyak/ooap_trekster/blob/main/Threat_Model_and_Mitigation_Plan.pdf" target="_blank">Threat model та migitation plan</a>**
+**<a href="https://github.com/yvoznyak/ooap_trekster/blob/main/Mitigation%20plan.md" target="_blank">Threat model та migitation plan</a>**
 
 ## Analytics model
 Таблиця основних функціональних метрик для застосунку управління особистими фінансами:

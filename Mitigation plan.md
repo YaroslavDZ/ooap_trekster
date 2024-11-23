@@ -1,3 +1,6 @@
+# Threat model diagram
+![Threat_Model_Trekster](https://github.com/user-attachments/assets/4e986aef-9b0b-43d7-a2eb-6bb13a5d4ec6)
+
 # Mitigation plan
 
 ## 1. Реєстрація користувача

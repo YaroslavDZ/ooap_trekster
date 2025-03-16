@@ -38,6 +38,34 @@ The application has two types of users: **authorized users** and **unauthorized 
 - Data storage: Regular automatic saving of changes to the database to prevent data loss
 - Compatibility: Compatibility with major file formats for export (CSV, Excel)
 
+## Security Requirements
+- **User Authentication**: The application should implement secure password hashing and session management to prevent unauthorized access.
+- **Data Encryption**: Sensitive user data, such as passwords, account balances, and transaction data, should be encrypted both at rest and in transit.
+- **User Privacy**: Personal data should only be visible to the respective user.
+- **Account Lockout**: After multiple unsuccessful login attempts, the account should be temporarily locked.
+
+## Performance Requirements
+- **Request Processing Time**: All user actions should be processed within 2 seconds.
+- **Maximum Data Load**: The application should support up to 10,000 transactions without performance degradation.
+- **Concurrent Users**: The system should support at least 50 concurrent users without a significant performance drop.
+
+## Backup and Data Recovery
+- **Automatic Backups**: The application should perform daily backups.
+- **Data Recovery**: There should be a recovery process in place to restore data from backups if needed.
+
+## Localization
+- **Multi-language Support**: The system should allow for easy addition of new languages.
+- **Currency Support**: Users should be able to select and display transactions in different currencies.
+
+## Testing Requirements
+- **Unit Testing**: All core functions should be covered by unit tests.
+- **Integration Testing**: Ensure all components work together seamlessly.
+- **User Acceptance Testing**: The system should undergo UAT to confirm that it meets the functional and non-functional requirements.
+
+## Accessibility
+- **Keyboard Navigation**: All parts of the application should be navigable using a keyboard.
+- **Screen Reader Support**: The application should support screen readers for visually impaired users.
+
 # Roles
 
 | Role                        | Description                                                                                                                   |

@@ -29,7 +29,6 @@ The application has two types of users: **authorized users** and **unauthorized 
 ## Non-Functional Requirements
 - Interface language: Ukrainian (with the possibility of adding other languages in the future)
 - Interface design: Static, without responsive design (non-responsive)
-- The application does not require internet access
 - The application must provide immediate feedback on user actions (less than 2 seconds for request processing)
 - Stability: The application should maintain stable performance even with a large amount of data (thousands of transactions)
 - The application should consume minimal system resources (CPU, RAM) to allow it to run on devices with medium technical specifications

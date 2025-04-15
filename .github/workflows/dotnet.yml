@@ -26,3 +26,19 @@ jobs:
       run: dotnet build Trekster_web/Trekster_web.sln --no-restore
     - name: Test
       run: dotnet test Trekster_web/Trekster_web.sln --no-build --verbosity normal
+
+    - name: Run Trekster app
+      working-directory: Trekster_web/Trekster_web
+      run: |
+        dotnet run --urls "http://localhost:7034" &
+        sleep 15
+
+    - name: Install Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
+
+    - name: Restore and run Selenium UI Tests
+      run: |
+        dotnet restore Testing/TreksterUISeleniumTests/TreksterUISeleniumTests/TreksterUISeleniumTests.csproj
+        dotnet test Testing/TreksterUISeleniumTests/TreksterUISeleniumTests/TreksterUISeleniumTests.csproj --verbosity normal

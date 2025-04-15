@@ -1,0 +1,28 @@
+﻿@model SettingsVM
+
+@{
+    ViewData["Title"] = "Налаштування рахунків";
+}
+
+<h2><center>Налаштування рахунків</center></h2>
+
+<hr />
+
+@foreach (var item in Model.Accounts)
+{
+    <div class="row" style="border: 2px solid #17a2b8; padding: 10px; margin: 1rem 0.5rem; border-radius: 10px; background-color: #cce5ff; color: #004085; align-items: center;">
+        <div class="col-md-7 col-sm-6 col-5" style="padding-right: 0.5rem;">
+            @Html.DisplayFor(modelItem => item.Name)
+        </div>
+        <div class="col-md-5 col-sm-6 col-7 centered">
+            <a asp-action="EditAccount" asp-route-id="@item.Id" class="btn btn-warning" style="margin-right: 0.3rem;">Редагувати</a>
+            <a asp-action="DeleteAccount" asp-route-id="@item.Id" class="btn btn-danger" style="margin-right: 0.5rem;">Видалити</a>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

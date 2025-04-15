@@ -1,0 +1,19 @@
+﻿@model TransactionVM
+
+@{
+    ViewData["Title"] = "Видалення транзакції";
+}
+
+<h2><center>Видалення транзакції</center></h2>
+
+<hr />
+
+<h3>Ви впевнені, що хочете видалити тразакцію @Html.DisplayFor(model => model.Date) на суму @Html.DisplayFor(model => model.Sum)?</h3>
+
+<div style="display: flex; margin-top: 1rem;">
+    <form asp-action="DeleteTransaction">
+        <input type="submit" value="Видалити" class="btn btn-danger">
+    </form>
+
+    <a asp-action="Index" style="margin-left: 1rem; margin-top: 0.25rem;">Назад до історії транзакцій</a>
+</div>

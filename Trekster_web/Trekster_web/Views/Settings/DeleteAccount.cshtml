@@ -1,0 +1,19 @@
+﻿@model AccountVM
+@{
+    ViewData["Title"] = "Видалення рахунку";
+}
+
+<h2><center>Видалення рахунку</center></h2>
+
+<hr />
+
+<h3>Ви впевнені, що хочете видалити рахунку @Html.DisplayFor(model => model.Name)?</h3>
+
+<div style="display: flex; margin-top: 1rem;">
+    <form asp-action="DeleteAccount">
+        <input type="submit" value="Видалити" class="btn btn-danger btn-wide">
+    </form>
+
+    <a asp-action="Accounts" style="margin-left: 1rem; margin-top: 0.25rem;">Назад до списку рахунків</a>
+</div>
+

@@ -1,0 +1,18 @@
+﻿@model AccountsVM
+
+@{
+    ViewData["Title"] = "Рахунки";
+}
+
+<h2><center>Рахунки</center></h2>
+
+<hr />
+        
+<a asp-action="Create" class="btn btn-primary btn-wide my-4">Додати рахунок</a>
+
+@foreach (var item in Model.AccountsSummary)
+{
+    <div class="info-container" style="border: 2px solid #17a2b8; background-color: #cce5ff; color: #004085;">
+        @Html.DisplayFor(modelItem => item)
+    </div>
+}

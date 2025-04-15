@@ -1,0 +1,45 @@
+﻿@model AccountsVM
+
+@{
+    ViewData["Title"] = "Додати рахунок";
+}
+
+<h2><center>Додати рахунок</center></h2>
+
+<hr />
+
+<center>
+    <div class="row centered mt-4">
+        <div class="col-md-4 col-sm-7 col-8">
+            <form asp-action="Create">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Назва</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                @foreach (var item in Model.StartBalances)
+                {
+                    <div class="form-group">
+                        <label asp-for="@item.Value" class="control-label">@item.Key</label>
+                        <input asp-for="@item.Value" type="number" name="StartBalances[@item.Key]" class="form-control" />
+                    </div>
+                }
+
+                <input type="submit" value="Додати" class="btn btn-primary btn-wide" />
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Index">Назад до переліку рахунків</a>
+    </div>
+</center>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

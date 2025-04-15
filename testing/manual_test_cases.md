@@ -1,6 +1,6 @@
 # Manual Test Cases
 
-# Authentication
+# Topic: Authentication
 
 ## Test Case: TC001
 
@@ -299,7 +299,7 @@
 | Actual        | Page displayed correctly on mobile devices.                                                  |
 | Status        | Pass                                                                                         |
 
-# Registration
+# Topic: Registration
 
 ## Test Case: TC021
 
@@ -344,7 +344,7 @@
 | Actual        | "Register" button not visible for logged-in users.                                           |
 | Status        | Pass                                                                                         |
 
-# Password reset
+# Topic: Password reset
 
 ## Test Case: TC024
 
@@ -449,7 +449,7 @@
 | Actual        | Each tab maintained separate navigation state.                                                |
 | Status        | Pass                                                                                         |
 
-# Registration Form Tests
+# Topic: Registration Form Tests
 
 ## Test Case: TC031
 
@@ -601,9 +601,7 @@
 
 ---
 
-# Home
-
-# Dashboard Test Cases
+# Topic: Home
 
 ## Test Case: TC041
 
@@ -755,7 +753,7 @@
 
 ---
 
-# Dashboard Navigation & UI Test Cases
+# Topic: Dashboard Navigation & UI Test Cases
 
 ## Test Case: TC051
 

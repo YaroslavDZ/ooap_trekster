@@ -39,7 +39,6 @@ jobs:
         sudo apt-get install -y google-chrome-stable
 
     - name: Restore and run Selenium UI Tests
-      working-directory: Testing/TreksterUISeleniumTests
       run: |
-        dotnet restore
-        dotnet test --no-build --verbosity normal
+        dotnet restore Testing/TreksterUISeleniumTests/TreksterUISeleniumTests.sln
+        dotnet test Testing/TreksterUISeleniumTests/TreksterUISeleniumTests.sln --no-build --verbosity normal

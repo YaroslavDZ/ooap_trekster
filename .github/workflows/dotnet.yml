@@ -44,7 +44,7 @@ jobs:
         sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver
 
     - name: Restore and run Selenium UI Tests
-      working-directory: TreksterUI_Tests_Path # заміни на реальний шлях до .sln
+      working-directory: Testing/TreksterUISeleniumTests
       run: |
         dotnet restore
         dotnet test --no-build --verbosity normal

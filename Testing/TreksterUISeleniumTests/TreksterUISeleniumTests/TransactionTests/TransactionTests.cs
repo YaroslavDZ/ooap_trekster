@@ -9,7 +9,10 @@ namespace TreksterUISeleniumTests.TransactionTests
 {
     public class TransactionTests
     {
-        [Fact]
+		private const string BaseUrl = "https://localhost:7034";
+		private static string _createdAccountName = string.Empty;
+
+		[Fact]
         public void CreateTransaction_WithValidData_ShouldRedirectToHome()
         {
             new DriverManager().SetUpDriver(new ChromeConfig());
@@ -24,7 +27,25 @@ namespace TreksterUISeleniumTests.TransactionTests
             driver.FindElement(By.CssSelector("button[type='submit']")).Click();
             wait.Until(ExpectedConditions.UrlContains("/Home/Index"));
 
-            driver.Navigate().GoToUrl("https://localhost:7034/Home/CreateTransaction");
+			driver.Navigate().GoToUrl($"{BaseUrl}/Accounts/Create");
+
+			_createdAccountName = "TestAcc_" + Guid.NewGuid().ToString("N").Substring(0, 5);
+			driver.FindElement(By.Name("Name")).SendKeys(_createdAccountName);
+
+			driver.FindElement(By.Name("StartBalances[Uah]")).SendKeys("123");
+			driver.FindElement(By.Name("StartBalances[Usd]")).SendKeys("234");
+			driver.FindElement(By.Name("StartBalances[Eur]")).SendKeys("345");
+			driver.FindElement(By.Name("StartBalances[Usdt]")).SendKeys("456");
+			driver.FindElement(By.Name("StartBalances[Btc]")).SendKeys("5");
+
+			driver.FindElement(By.Name("Name")).SendKeys(_createdAccountName + Keys.Tab);
+
+			var submitButtonFirst = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("input[type='submit']")));
+			((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();", submitButtonFirst);
+
+			wait.Until(ExpectedConditions.UrlContains("/Accounts/Index"));
+
+			driver.Navigate().GoToUrl("https://localhost:7034/Home/CreateTransaction");
 
             var accountSelect = new SelectElement(driver.FindElement(By.Name("AccountsAndCurency")));
             accountSelect.SelectByIndex(0);
@@ -36,8 +57,8 @@ namespace TreksterUISeleniumTests.TransactionTests
             sumInput.Clear();
             sumInput.SendKeys("150");
 
-            var submitButton = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("input[type='submit']")));
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();", submitButton);
+            var submitButtonSecond = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("input[type='submit']")));
+            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();", submitButtonSecond);
 
             wait.Until(ExpectedConditions.UrlContains("/Home/Index"));
 

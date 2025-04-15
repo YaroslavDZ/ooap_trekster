@@ -23,8 +23,8 @@ namespace TreksterUISeleniumTests.AccountTests
         public void CreateAccount_WithValidData_ShouldAppearInList()
         {
             new DriverManager().SetUpDriver(new ChromeConfig());
-            using var driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
+			using var driver = WebDriverFactory.CreateDriver();
+			driver.Manage().Window.Maximize();
 
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             Login(driver, wait);
@@ -57,7 +57,7 @@ namespace TreksterUISeleniumTests.AccountTests
             Assert.False(string.IsNullOrEmpty(_createdAccountName), "Account name is not set from previous test.");
 
             new DriverManager().SetUpDriver(new ChromeConfig());
-            using var driver = new ChromeDriver();
+            using var driver = WebDriverFactory.CreateDriver();
             driver.Manage().Window.Maximize();
 
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));

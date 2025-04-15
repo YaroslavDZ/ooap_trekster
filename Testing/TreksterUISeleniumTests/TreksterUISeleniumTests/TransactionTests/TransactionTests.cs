@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
 using WebDriverManager.DriverConfigs.Impl;
 using WebDriverManager;
+using TreksterUISeleniumTests.Helpers;
 
 namespace TreksterUISeleniumTests.TransactionTests
 {
@@ -16,7 +17,7 @@ namespace TreksterUISeleniumTests.TransactionTests
         public void CreateTransaction_WithValidData_ShouldRedirectToHome()
         {
             new DriverManager().SetUpDriver(new ChromeConfig());
-            using var driver = new ChromeDriver();
+            using var driver = WebDriverFactory.CreateDriver();
             driver.Manage().Window.Maximize();
 
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));

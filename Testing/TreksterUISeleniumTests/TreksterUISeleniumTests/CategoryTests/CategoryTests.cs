@@ -44,8 +44,8 @@ namespace TreksterUISeleniumTests.CategoryTests
         private IWebDriver InitDriver()
         {
             new DriverManager().SetUpDriver(new ChromeConfig());
-            var driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
+			var driver = WebDriverFactory.CreateDriver();
+			driver.Manage().Window.Maximize();
             return driver;
         }
 

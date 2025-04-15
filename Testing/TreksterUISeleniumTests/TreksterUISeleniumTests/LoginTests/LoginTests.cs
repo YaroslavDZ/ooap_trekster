@@ -4,6 +4,7 @@ using WebDriverManager.DriverConfigs.Impl;
 using WebDriverManager;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
+using TreksterUISeleniumTests.Helpers;
 
 namespace TreksterUISeleniumTests.LoginTests
 {
@@ -13,7 +14,7 @@ namespace TreksterUISeleniumTests.LoginTests
         public void Login_WithEmptyFields_ShouldShowRequiredFieldValidation()
         {
             new DriverManager().SetUpDriver(new ChromeConfig());
-            using var driver = new ChromeDriver();
+            using var driver = WebDriverFactory.CreateDriver();
 
             driver.Navigate().GoToUrl("https://localhost:7034/");
 
@@ -33,7 +34,7 @@ namespace TreksterUISeleniumTests.LoginTests
         public void Login_WithInvalidEmailFormat_ShouldShowHtml5ValidationError()
         {
             new DriverManager().SetUpDriver(new ChromeConfig());
-            using var driver = new ChromeDriver();
+            using var driver = WebDriverFactory.CreateDriver();
 
             driver.Navigate().GoToUrl("https://localhost:7034/");
 
@@ -56,7 +57,7 @@ namespace TreksterUISeleniumTests.LoginTests
         public void Login_WithWrongPassword_ShouldShowInvalidLoginMessage()
         {
             new DriverManager().SetUpDriver(new ChromeConfig());
-            using var driver = new ChromeDriver();
+            using var driver = WebDriverFactory.CreateDriver();
 
             driver.Navigate().GoToUrl("https://localhost:7034/");
 
@@ -74,7 +75,7 @@ namespace TreksterUISeleniumTests.LoginTests
         public void Login_WithValidCredentials_ShouldRedirectToHome()
         {
             new DriverManager().SetUpDriver(new ChromeConfig());
-            using var driver = new ChromeDriver();
+            using var driver = WebDriverFactory.CreateDriver();
 
             driver.Navigate().GoToUrl("https://localhost:7034/");
 

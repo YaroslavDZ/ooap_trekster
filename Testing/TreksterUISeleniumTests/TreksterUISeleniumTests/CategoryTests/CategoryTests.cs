@@ -11,8 +11,8 @@ namespace TreksterUISeleniumTests.CategoryTests
     public class CategoryTests
     {
         private const string BaseUrl = "https://localhost:7034";
-        private const string Email = "YourLogin";
-        private const string Password = "YourPassword";
+        private const string Email = "test@user.com";
+        private const string Password = "Test123!";
 
         [Fact(DisplayName = "Category Сreate Test")]
         public void CreateEditDelete_Category_Lifecycle()

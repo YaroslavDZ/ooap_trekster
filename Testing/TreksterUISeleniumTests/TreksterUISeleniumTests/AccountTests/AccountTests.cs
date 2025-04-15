@@ -15,8 +15,8 @@ namespace TreksterUISeleniumTests.AccountTests
     public class AccountTests
     {
         private const string BaseUrl = "https://localhost:7034";
-        private const string Email = "YourLogin";
-        private const string Password = "YourPassword";
+        private const string Email = "test@user.com";
+        private const string Password = "Test123!";
         private static string _createdAccountName = string.Empty;
 
         [Fact, TestPriority(1)]

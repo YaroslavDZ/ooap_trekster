@@ -26,3 +26,25 @@ jobs:
       run: dotnet build Trekster_web/Trekster_web.sln --no-restore
     - name: Test
       run: dotnet test Trekster_web/Trekster_web.sln --no-build --verbosity normal
+
+    - name: Run Trekster app
+      working-directory: Trekster_web/Trekster_web
+      run: |
+        dotnet run --urls "http://localhost:7034" &
+        sleep 25
+
+    - name: Install Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
+
+    - name: Install Chromedriver
+      run: |
+        sudo apt-get install -y chromium-chromedriver
+        sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver
+
+    - name: Restore and run Selenium UI Tests
+      working-directory: TreksterUI_Tests_Path # заміни на реальний шлях до .sln
+      run: |
+        dotnet restore
+        dotnet test --no-build --verbosity normal

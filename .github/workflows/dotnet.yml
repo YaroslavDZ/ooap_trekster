@@ -32,8 +32,9 @@ jobs:
 
     - name: Run Trekster app in background
       run: |
-        dotnet ./publish/Trekster_web.dll --urls "http://localhost:7034" &
-        sleep 10
+        dotnet ./publish/Trekster_web.dll --urls "http://localhost:7034" > output.log 2>&1 &
+        sleep 5
+        cat output.log
 
     - name: Wait until app is ready
       run: |

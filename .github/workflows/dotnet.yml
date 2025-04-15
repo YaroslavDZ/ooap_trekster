@@ -40,5 +40,5 @@ jobs:
 
     - name: Restore and run Selenium UI Tests
       run: |
-        dotnet restore Testing/TreksterUISeleniumTests/TreksterUISeleniumTests.sln
-        dotnet test Testing/TreksterUISeleniumTests/TreksterUISeleniumTests.sln --no-build --verbosity normal
+        dotnet restore Testing/TreksterUISeleniumTests/TreksterUISeleniumTests/TreksterUISeleniumTests.csproj
+        dotnet test Testing/TreksterUISeleniumTests/TreksterUISeleniumTests/TreksterUISeleniumTests.csproj --no-build --verbosity normal

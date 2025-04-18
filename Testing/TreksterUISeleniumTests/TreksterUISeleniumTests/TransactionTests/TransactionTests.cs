@@ -23,8 +23,8 @@ namespace TreksterUISeleniumTests.TransactionTests
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
 
             driver.Navigate().GoToUrl("http://localhost:7034/User/Login");
-            driver.FindElement(By.Name("Email")).SendKeys(Environment.GetEnvironmentVariable("Email"));
-            driver.FindElement(By.Name("Password")).SendKeys(Environment.GetEnvironmentVariable("Password"));
+            driver.FindElement(By.Name("Email")).SendKeys(Environment.GetEnvironmentVariable("EMAIL"));
+            driver.FindElement(By.Name("Password")).SendKeys(Environment.GetEnvironmentVariable("PASSWORD"));
             driver.FindElement(By.CssSelector("button[type='submit']")).Click();
             wait.Until(ExpectedConditions.UrlContains("/Home/Index"));
 

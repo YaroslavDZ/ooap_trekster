@@ -15,8 +15,8 @@ namespace TreksterUISeleniumTests.AccountTests
     public class AccountTests
     {
         private const string BaseUrl = "http://localhost:7034";
-        private readonly string Email = Environment.GetEnvironmentVariable("Email");
-        private readonly string Password = Environment.GetEnvironmentVariable("Password");
+        private readonly string Email = Environment.GetEnvironmentVariable("EMAIL");
+        private readonly string Password = Environment.GetEnvironmentVariable("PASSWORD");
         private static string _createdAccountName = string.Empty;
 
         [Fact, TestPriority(1)]

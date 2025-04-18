@@ -10,6 +10,13 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    # Прокидаємо секрети на рівні всього job, щоб вони були доступні у всіх кроках
+    env:
+      Email:             ${{ secrets.Email }}
+      Password:          ${{ secrets.Password }}
+      TestUser__Email:   ${{ secrets.Email }}
+      TestUser__Password:${{ secrets.Password }}
+
     steps:
     - uses: actions/checkout@v4
 
@@ -25,17 +32,18 @@ jobs:
       run: dotnet build Trekster_web/Trekster_web.sln --no-restore
 
     - name: Run unit/integration tests (excluding UI)
-      run: dotnet test Trekster_web/Trekster_web.sln --no-build --verbosity normal --filter "FullyQualifiedName!~TreksterUISeleniumTests"
+      run: dotnet test Trekster_web/Trekster_web.sln \
+            --no-build --verbosity normal \
+            --filter "FullyQualifiedName!~TreksterUISeleniumTests"
 
     - name: Publish Trekster for CI
-      run: dotnet publish Trekster_web/Trekster_web/Trekster_web.csproj -c Release -o publish
+      run: dotnet publish Trekster_web/Trekster_web/Trekster_web.csproj \
+            -c Release -o publish
 
     - name: Serve Trekster
       env:
         ASPNETCORE_URLS:        "http://0.0.0.0:7034"
         ASPNETCORE_ENVIRONMENT: Development
-        TESTUSER__EMAIL:        ${{ secrets.Email }}
-        TESTUSER__PASSWORD:     ${{ secrets.Password }}
       run: |
         cd publish
         nohup dotnet Trekster_web.dll > ../trekster.log 2>&1 &
@@ -43,21 +51,18 @@ jobs:
         sleep 10
         lsof -iTCP:7034 -sTCP:LISTEN || (cat trekster.log && exit 1)
         curl -v http://localhost:7034
-    
+
     - name: Health check
       run: |
-        # sometimes localhost resolves IPv6; test both
+        # іноді localhost резолвиться в IPv6
         curl -v http://127.0.0.1:7034 || curl -v http://localhost:7034
-    
+
     - name: Install Chrome
       run: |
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
-    
+
     - name: Restore & run Selenium UI Tests
-      env:
-        EMAIL:    ${{ secrets.Email }}
-        PASSWORD: ${{ secrets.Password }}
       run: |
         dotnet restore Testing/TreksterUISeleniumTests/TreksterUISeleniumTests/TreksterUISeleniumTests.csproj
         dotnet test Testing/TreksterUISeleniumTests/TreksterUISeleniumTests/TreksterUISeleniumTests.csproj --verbosity normal

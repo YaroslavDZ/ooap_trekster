@@ -30,16 +30,20 @@ jobs:
     - name: Publish Trekster for CI
       run: dotnet publish Trekster_web/Trekster_web/Trekster_web.csproj -c Release -o publish
 
-    - name: Serve Trekster on port 7034
+    - name: Serve Trekster
       env:
         ASPNETCORE_URLS: "http://0.0.0.0:7034"
+        ASPNETCORE_ENVIRONMENT: Development    # ← run in Dev
       run: |
-        # start the app in background, capture logs
-        nohup dotnet publish/Trekster_web.dll > trekster.log 2>&1 &
-        # give it a bit longer to spin up
+        cd publish
+        nohup dotnet Trekster_web.dll > ../trekster.log 2>&1 &
+        cd ..
         sleep 10
-        # sanity‑check that it's running
-        lsof -iTCP:7034 -sTCP:LISTEN || (echo ">> no listener on 7034 <<" && cat trekster.log && exit 1)
+        # sanity‑check that Kestrel is listening:
+        lsof -iTCP:7034 -sTCP:LISTEN \
+          || ( echo "NO LISTENER—dumping logs:" && cat trekster.log && exit 1 )
+        # quick curl health check
+        curl -v http://localhost:7034
     
     - name: Health check
       run: |

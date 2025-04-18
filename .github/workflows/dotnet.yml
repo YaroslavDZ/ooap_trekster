@@ -56,6 +56,9 @@ jobs:
         sudo apt-get install -y google-chrome-stable
     
     - name: Restore & run Selenium UI Tests
+      env:
+        Email:    ${{ secrets.Email }}
+        Password: ${{ secrets.Password }}
       run: |
         dotnet restore Testing/TreksterUISeleniumTests/TreksterUISeleniumTests/TreksterUISeleniumTests.csproj
         dotnet test Testing/TreksterUISeleniumTests/TreksterUISeleniumTests/TreksterUISeleniumTests.csproj --verbosity normal

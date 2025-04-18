@@ -10,7 +10,7 @@ namespace TreksterUISeleniumTests.TransactionTests
 {
     public class TransactionTests
     {
-		private const string BaseUrl = "http://localhost:7034";
+		private readonly string BaseUrl = "http://localhost:7034";
 		private static string _createdAccountName = string.Empty;
 
 		[Fact]

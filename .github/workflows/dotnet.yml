@@ -15,7 +15,7 @@ jobs:
       Email:             ${{ secrets.Email }}
       Password:          ${{ secrets.Password }}
       TestUser__Email:   ${{ secrets.Email }}
-      TestUser__Password:${{ secrets.Password }}
+      TestUser__Password: ${{ secrets.Password }}
 
     steps:
     - uses: actions/checkout@v4

@@ -14,9 +14,9 @@ namespace TreksterUISeleniumTests.AccountTests
     [TestCaseOrderer("TreksterUISeleniumTests.Helpers.PriorityOrderer", "TreksterUISeleniumTests")]
     public class AccountTests
     {
-        private const string BaseUrl = "https://localhost:7034";
-        private const string Email = "test@user.com";
-        private const string Password = "Test123!";
+        private const string BaseUrl = "http://localhost:7034";
+        private const string Email = Environment.GetEnvironmentVariable("Email");
+        private const string Password = Environment.GetEnvironmentVariable("Password");
         private static string _createdAccountName = string.Empty;
 
         [Fact, TestPriority(1)]

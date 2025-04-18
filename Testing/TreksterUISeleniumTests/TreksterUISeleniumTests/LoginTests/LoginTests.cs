@@ -16,7 +16,7 @@ namespace TreksterUISeleniumTests.LoginTests
             new DriverManager().SetUpDriver(new ChromeConfig());
             using var driver = WebDriverFactory.CreateDriver();
 
-            driver.Navigate().GoToUrl("https://localhost:7034/");
+            driver.Navigate().GoToUrl("http://localhost:7034/");
 
             driver.FindElement(By.Name("Email")).Clear();
             driver.FindElement(By.Name("Password")).Clear();
@@ -36,7 +36,7 @@ namespace TreksterUISeleniumTests.LoginTests
             new DriverManager().SetUpDriver(new ChromeConfig());
             using var driver = WebDriverFactory.CreateDriver();
 
-            driver.Navigate().GoToUrl("https://localhost:7034/");
+            driver.Navigate().GoToUrl("http://localhost:7034/");
 
             var emailInput = driver.FindElement(By.Name("Email"));
             var passwordInput = driver.FindElement(By.Name("Password"));
@@ -59,7 +59,7 @@ namespace TreksterUISeleniumTests.LoginTests
             new DriverManager().SetUpDriver(new ChromeConfig());
             using var driver = WebDriverFactory.CreateDriver();
 
-            driver.Navigate().GoToUrl("https://localhost:7034/");
+            driver.Navigate().GoToUrl("http://localhost:7034/");
 
             driver.FindElement(By.Name("Email")).SendKeys("user@example.com");
             driver.FindElement(By.Name("Password")).SendKeys("wrongpassword123");
@@ -77,14 +77,14 @@ namespace TreksterUISeleniumTests.LoginTests
             new DriverManager().SetUpDriver(new ChromeConfig());
             using var driver = WebDriverFactory.CreateDriver();
 
-            driver.Navigate().GoToUrl("https://localhost:7034/");
+            driver.Navigate().GoToUrl("http://localhost:7034/");
 
             var emailInput = driver.FindElement(By.Name("Email"));
             var passwordInput = driver.FindElement(By.Name("Password"));
             var loginButton = driver.FindElement(By.CssSelector("button[type='submit']"));
 
-            emailInput.SendKeys("test@user.com");
-            passwordInput.SendKeys("Test123!");
+            emailInput.SendKeys(Environment.GetEnvironmentVariable("Email"));
+            passwordInput.SendKeys(Environment.GetEnvironmentVariable("Password"));
 
             loginButton.Click();
 

@@ -10,7 +10,7 @@ namespace TreksterUISeleniumTests.TransactionTests
 {
     public class TransactionTests
     {
-		private const string BaseUrl = "https://localhost:7034";
+		private const string BaseUrl = "http://localhost:7034";
 		private static string _createdAccountName = string.Empty;
 
 		[Fact]
@@ -22,9 +22,9 @@ namespace TreksterUISeleniumTests.TransactionTests
 
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
 
-            driver.Navigate().GoToUrl("https://localhost:7034/User/Login");
-            driver.FindElement(By.Name("Email")).SendKeys("test@user.com");
-            driver.FindElement(By.Name("Password")).SendKeys("Test123!");
+            driver.Navigate().GoToUrl("http://localhost:7034/User/Login");
+            driver.FindElement(By.Name("Email")).SendKeys(Environment.GetEnvironmentVariable("Email"));
+            driver.FindElement(By.Name("Password")).SendKeys(Environment.GetEnvironmentVariable("Password"));
             driver.FindElement(By.CssSelector("button[type='submit']")).Click();
             wait.Until(ExpectedConditions.UrlContains("/Home/Index"));
 
@@ -46,7 +46,7 @@ namespace TreksterUISeleniumTests.TransactionTests
 
 			wait.Until(ExpectedConditions.UrlContains("/Accounts/Index"));
 
-			driver.Navigate().GoToUrl("https://localhost:7034/Home/CreateTransaction");
+			driver.Navigate().GoToUrl("http://localhost:7034/Home/CreateTransaction");
 
             var accountSelect = new SelectElement(driver.FindElement(By.Name("AccountsAndCurency")));
             accountSelect.SelectByIndex(0);

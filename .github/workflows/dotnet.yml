@@ -32,17 +32,16 @@ jobs:
 
     - name: Serve Trekster
       env:
-        ASPNETCORE_URLS: "http://0.0.0.0:7034"
-        ASPNETCORE_ENVIRONMENT: Development    # ← run in Dev
+        ASPNETCORE_URLS:          "http://0.0.0.0:7034"
+        ASPNETCORE_ENVIRONMENT:   Development
+        TestUser__Email:          ${{ secrets.Email }}
+        TestUser__Password:       ${{ secrets.Password }}
       run: |
         cd publish
         nohup dotnet Trekster_web.dll > ../trekster.log 2>&1 &
         cd ..
         sleep 10
-        # sanity‑check that Kestrel is listening:
-        lsof -iTCP:7034 -sTCP:LISTEN \
-          || ( echo "NO LISTENER—dumping logs:" && cat trekster.log && exit 1 )
-        # quick curl health check
+        lsof -iTCP:7034 -sTCP:LISTEN || (cat trekster.log && exit 1)
         curl -v http://localhost:7034
     
     - name: Health check

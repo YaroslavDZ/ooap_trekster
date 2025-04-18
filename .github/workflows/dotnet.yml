@@ -27,26 +27,35 @@ jobs:
     - name: Run unit/integration tests (excluding UI)
       run: dotnet test Trekster_web/Trekster_web.sln --no-build --verbosity normal --filter "FullyQualifiedName!~TreksterUISeleniumTests"
 
-    - name: Publish Trekster app
-      run: dotnet publish Trekster_web/Trekster_web/Trekster_web.csproj -c Release -o ./publish
+    - name: Publish Trekster for CI
+      run: dotnet publish Trekster_web/Trekster_web/Trekster_web.csproj -c Release -o publish
 
-    - name: Run Trekster app in background
+    - name: Serve Trekster
+      env:
+        ASPNETCORE_URLS: "http://0.0.0.0:7034"
+        ASPNETCORE_ENVIRONMENT: Development    # ← run in Dev
       run: |
-        dotnet ./publish/Trekster_web.dll --urls "http://localhost:7034" > output.log 2>&1 &
-        sleep 5
-        cat output.log
-
-    - name: Wait until app is ready
+        cd publish
+        nohup dotnet Trekster_web.dll > ../trekster.log 2>&1 &
+        cd ..
+        sleep 10
+        # sanity‑check that Kestrel is listening:
+        lsof -iTCP:7034 -sTCP:LISTEN \
+          || ( echo "NO LISTENER—dumping logs:" && cat trekster.log && exit 1 )
+        # quick curl health check
+        curl -v http://localhost:7034
+    
+    - name: Health check
       run: |
-        sudo apt-get install -y curl
-        for i in {1..20}; do curl http://localhost:7034 && break || sleep 2; done
-
+        # sometimes localhost resolves IPv6; test both
+        curl -v http://127.0.0.1:7034 || curl -v http://localhost:7034
+    
     - name: Install Chrome
       run: |
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
-
-    - name: Restore and run Selenium UI Tests
+    
+    - name: Restore & run Selenium UI Tests
       run: |
         dotnet restore Testing/TreksterUISeleniumTests/TreksterUISeleniumTests/TreksterUISeleniumTests.csproj
         dotnet test Testing/TreksterUISeleniumTests/TreksterUISeleniumTests/TreksterUISeleniumTests.csproj --verbosity normal

@@ -112,6 +112,31 @@ public partial class Program
             name: "default",
             pattern: "{controller=User}/{action=Login}/{id?}");
 
+        if (app.Configuration.GetValue<bool>("SeedTestUser"))
+        {
+            using var scope = app.Services.CreateAsyncScope();
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+
+            var email = app.Configuration["TestUser:Email"] ?? "test@user.com";
+            var pwd = app.Configuration["TestUser:Password"] ?? "Test123!";
+
+            if (userManager.FindByEmailAsync(email) is null)
+            {
+                var user = new User
+                {
+                    UserName = email,
+                    Email = email,
+                    EmailConfirmed = true
+                };
+
+                var res = userManager.CreateAsync(user, pwd);
+                if (!res.IsCompleted)
+                {
+                    throw new InvalidOperationException("Seed failed: ");
+                }
+            }
+        }
+
         app.Run();
     }
 }

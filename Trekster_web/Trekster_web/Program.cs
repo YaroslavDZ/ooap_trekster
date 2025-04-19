@@ -23,12 +23,6 @@ public partial class Program
 
         var builder = WebApplication.CreateBuilder(args);
 
-        if (builder.Environment.IsDevelopment())
-        {
-            builder.Services.PostConfigure<IdentityOptions>(opts =>
-                opts.SignIn.RequireConfirmedEmail = false);
-        }
-
         builder.Services.AddScoped<ICurrency, CurrencyRepository>();
         builder.Services.AddScoped<IAccount, AccountRepository>();
         builder.Services.AddScoped<ICategory, CategoryRepository>();
@@ -86,6 +80,13 @@ public partial class Program
         })
         .AddEntityFrameworkStores<AppDbContext>()
         .AddDefaultTokenProviders();
+
+
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.Services.PostConfigure<IdentityOptions>(opts =>
+                opts.SignIn.RequireConfirmedEmail = false);
+        }
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();

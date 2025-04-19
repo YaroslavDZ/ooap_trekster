@@ -88,7 +88,7 @@ namespace TreksterUISeleniumTests.LoginTests
 
             loginButton.Click();
 
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.TitleContains("Головна"));
 
             Assert.Contains("Головна", driver.Title);

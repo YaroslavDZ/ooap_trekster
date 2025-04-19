@@ -11,8 +11,8 @@ namespace TreksterUISeleniumTests.CategoryTests
     public class CategoryTests
     {
         private readonly string BaseUrl = "http://localhost:7034";
-        private readonly string Email = "test@user.com";
-        private readonly string Password = "Test123!";
+        private readonly string Email = Environment.GetEnvironmentVariable("EMAIL") ?? "test@user.com";
+        private readonly string Password = Environment.GetEnvironmentVariable("PASSWORD") ?? "Test123!";
 
         [Fact(DisplayName = "Category Сreate Test")]
         public void Create_Category()

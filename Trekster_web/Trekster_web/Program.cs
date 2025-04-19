@@ -1,4 +1,4 @@
-﻿using BusinessLogic.Implementations;
+using BusinessLogic.Implementations;
 using BusinessLogic.Interfaces;
 using BusinessLogic.Mapping.Profiles;
 using BusinessLogic.Models;
@@ -111,32 +111,6 @@ public partial class Program
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=User}/{action=Login}/{id?}");
-
-        using (var scope = app.Services.CreateScope())
-        {
-            var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            var um = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-
-            db.Database.Migrate();
-
-            string email = Environment.GetEnvironmentVariable("EMAIL") ?? builder.Configuration["TestUser:Email"];
-            string pw = Environment.GetEnvironmentVariable("PASSWORD") ?? builder.Configuration["TestUser:Password"];
-
-            if (um.FindByEmailAsync(email).Result == null)
-            {
-                var user = new User
-                {
-                    UserName = email,
-                    Email = email,
-                    EmailConfirmed = true,
-                };
-                var result = um.CreateAsync(user, pw).Result;
-                if (!result.Succeeded)
-                {
-                    throw new Exception("Error while creating dumny user" + string.Join(", ", result.Errors.Select(e => e.Description)));
-                }
-            }
-        }
 
         app.Run();
     }

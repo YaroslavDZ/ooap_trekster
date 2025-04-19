@@ -15,7 +15,7 @@ namespace TreksterUISeleniumTests.CategoryTests
         private readonly string Password = "Test123!";
 
         [Fact(DisplayName = "Category Сreate Test")]
-        public void CreateEditDelete_Category_Lifecycle()
+        public void Create_Category()
         {
             var createdCategoryName = "TestCat_" + Guid.NewGuid().ToString("N").Substring(0, 5);
             var updatedCategoryName = createdCategoryName + "_Updated";

@@ -10,6 +10,7 @@ using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Runtime.CompilerServices;
 using Trekster_web.ControllerServices.Implementation;
 using Trekster_web.ControllerServices.Interfaces;
 using Trekster_web.Mapping;
@@ -18,7 +19,7 @@ namespace Trekster_web;
 
 public partial class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
 
         var builder = WebApplication.CreateBuilder(args);
@@ -114,29 +115,29 @@ public partial class Program
 
         if (app.Configuration.GetValue<bool>("SeedTestUser"))
         {
-            using var scope = app.Services.CreateAsyncScope();
+            await using var scope = app.Services.CreateAsyncScope();
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
             var email = app.Configuration["TestUser:Email"] ?? "test@user.com";
             var pwd = app.Configuration["TestUser:Password"] ?? "Test123!";
 
-            if (userManager.FindByEmailAsync(email) is null)
+            if (await userManager.FindByEmailAsync(email) is null)
             {
                 var user = new User
                 {
                     UserName = email,
                     Email = email,
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
                 };
 
-                var res = userManager.CreateAsync(user, pwd);
-                if (!res.IsCompleted)
+                var res = await userManager.CreateAsync(user, pwd);
+                if (!res.Succeeded)
                 {
                     throw new InvalidOperationException("Seed failed: ");
                 }
             }
         }
 
-        app.Run();
+        await app.RunAsync();
     }
 }

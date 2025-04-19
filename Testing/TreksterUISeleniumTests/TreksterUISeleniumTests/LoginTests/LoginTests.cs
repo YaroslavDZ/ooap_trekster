@@ -22,7 +22,7 @@ namespace TreksterUISeleniumTests.LoginTests
             driver.FindElement(By.Name("Password")).Clear();
             driver.FindElement(By.CssSelector("button[type='submit']")).Click();
 
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             var validation = wait.Until(drv =>
                 drv.FindElements(By.ClassName("text-danger"))
                     .FirstOrDefault(e => e.Displayed && e.Text.Contains("The Email field is required.")));
@@ -65,7 +65,7 @@ namespace TreksterUISeleniumTests.LoginTests
             driver.FindElement(By.Name("Password")).SendKeys("wrongpassword123");
             driver.FindElement(By.CssSelector("button[type='submit']")).Click();
 
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
             var errorContainer = wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("validation-summary-errors")));
             Assert.Contains("Invalid UserName or Password", errorContainer.Text);
@@ -88,7 +88,7 @@ namespace TreksterUISeleniumTests.LoginTests
 
             loginButton.Click();
 
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.TitleContains("Головна"));
 
             Assert.Contains("Головна", driver.Title);

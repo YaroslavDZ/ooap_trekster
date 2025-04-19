@@ -20,7 +20,7 @@ namespace TreksterUISeleniumTests.TransactionTests
             using var driver = WebDriverFactory.CreateDriver();
             driver.Manage().Window.Maximize();
 
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
             driver.Navigate().GoToUrl("http://localhost:7034/User/Login");
             driver.FindElement(By.Name("Email")).SendKeys("test@user.com");

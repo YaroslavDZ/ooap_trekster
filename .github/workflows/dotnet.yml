@@ -10,6 +10,21 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: treksterdb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
     - uses: actions/checkout@v4
 
@@ -18,11 +33,38 @@ jobs:
       with:
         dotnet-version: 7.0.x
 
+    - name: Install EF Core CLI
+      run: |
+        dotnet tool install --global dotnet-ef --version 7.*
+        echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+
     - name: Restore dependencies
       run: dotnet restore Trekster_web/Trekster_web.sln
 
     - name: Build solution
       run: dotnet build Trekster_web/Trekster_web.sln --no-restore
+
+    - name: Wait for Postgres to be ready
+      run: |
+        echo "Waiting for PostgreSQL..."
+        for i in $(seq 1 30); do
+          if bash -c "</dev/tcp/localhost/5432" &>/dev/null; then
+            echo "PostgreSQL is ready!"
+            exit 0
+          fi
+          echo "Still waiting ($i/30)"
+          sleep 1
+        done
+        echo "PostgreSQL did not become ready in time." >&2
+        exit 1
+
+    - name: Run EF Migrations
+      env:
+        ConnectionStrings__DefaultConnection: "Host=localhost;Port=5432;Database=treksterdb;Username=postgres;Password=postgres;"
+      run: |
+        dotnet ef database update \
+          --project Trekster_web/Trekster_web/Trekster_web.csproj \
+          --startup-project Trekster_web/Trekster_web/Trekster_web.csproj
 
     - name: Run unit/integration tests (excluding UI)
       run: dotnet test Trekster_web/Trekster_web.sln --no-build --verbosity normal --filter "FullyQualifiedName!~TreksterUISeleniumTests"
@@ -36,6 +78,7 @@ jobs:
         ASPNETCORE_ENVIRONMENT: Development
         TESTUSER__EMAIL:        ${{ secrets.Email }}
         TESTUSER__PASSWORD:     ${{ secrets.Password }}
+        ConnectionStrings__DefaultConnection: "Host=localhost;Port=5432;Database=treksterdb;Username=postgres;Password=postgres;"
       run: |
         cd publish
         nohup dotnet Trekster_web.dll > ../trekster.log 2>&1 &
@@ -46,7 +89,6 @@ jobs:
     
     - name: Health check
       run: |
-        # sometimes localhost resolves IPv6; test both
         curl -v http://127.0.0.1:7034 || curl -v http://localhost:7034
     
     - name: Install Chrome
@@ -58,6 +100,7 @@ jobs:
       env:
         EMAIL:    ${{ secrets.Email }}
         PASSWORD: ${{ secrets.Password }}
+        ConnectionStrings__DefaultConnection: "Host=localhost;Port=5432;Database=treksterdb;Username=postgres;Password=postgres;"
       run: |
         dotnet restore Testing/TreksterUISeleniumTests/TreksterUISeleniumTests/TreksterUISeleniumTests.csproj
         dotnet test Testing/TreksterUISeleniumTests/TreksterUISeleniumTests/TreksterUISeleniumTests.csproj --verbosity normal

@@ -46,12 +46,12 @@ jobs:
 
     - name: Run EF Migrations
       env:
-        ConnectionStrings__DefaultConnection: "Host=localhost;Port=5431;Database=treksterdb;Username=postgres;Password=1234;"
+        ConnectionStrings__DefaultConnection: "Host=localhost;Port=5432;Database=treksterdb;Username=postgres;Password=1234;"
       run: |
         dotnet ef database update \
           --project Trekster_web/Trekster_web/Trekster_web.csproj \
           --startup-project Trekster_web/Trekster_web/Trekster_web.csproj
-    # ────────────────────────────────────────────────────────────────────────────
+    # 
 
     - name: Run unit/integration tests (excluding UI)
       run: dotnet test Trekster_web/Trekster_web.sln --no-build --verbosity normal --filter "FullyQualifiedName!~TreksterUISeleniumTests"
@@ -87,7 +87,7 @@ jobs:
       env:
         EMAIL:    ${{ secrets.Email }}
         PASSWORD: ${{ secrets.Password }}
-        ConnectionStrings__DefaultConnection: "Host=localhost;Port=5431;Database=treksterdb;Username=postgres;Password=1234;"
+        ConnectionStrings__DefaultConnection: "Host=localhost;Port=5432;Database=treksterdb;Username=postgres;Password=1234;"
       run: |
         dotnet restore Testing/TreksterUISeleniumTests/TreksterUISeleniumTests/TreksterUISeleniumTests.csproj
         dotnet test Testing/TreksterUISeleniumTests/TreksterUISeleniumTests/TreksterUISeleniumTests.csproj --verbosity normal

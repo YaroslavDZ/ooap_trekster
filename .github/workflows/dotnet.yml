@@ -76,6 +76,7 @@ jobs:
       env:
         ASPNETCORE_URLS:        "http://0.0.0.0:7034"
         ASPNETCORE_ENVIRONMENT: Development
+        SeedTestUser:          "true" 
         TESTUSER__EMAIL:        ${{ secrets.Email }}
         TESTUSER__PASSWORD:     ${{ secrets.Password }}
         ConnectionStrings__DefaultConnection: "Host=localhost;Port=5432;Database=treksterdb;Username=postgres;Password=postgres;"

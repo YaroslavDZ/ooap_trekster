@@ -83,8 +83,8 @@ namespace TreksterUISeleniumTests.LoginTests
             var passwordInput = driver.FindElement(By.Name("Password"));
             var loginButton = driver.FindElement(By.CssSelector("button[type='submit']"));
 
-            emailInput.SendKeys(Environment.GetEnvironmentVariable("EMAIL"));
-            passwordInput.SendKeys(Environment.GetEnvironmentVariable("PASSWORD"));
+            emailInput.SendKeys("test@user.com");
+            passwordInput.SendKeys("Test123!");
 
             loginButton.Click();
 

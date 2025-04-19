@@ -52,7 +52,7 @@ namespace TreksterUISeleniumTests.TransactionTests
             accountSelect.SelectByIndex(0);
 
             var categorySelect = new SelectElement(driver.FindElement(By.Name("CategoryId")));
-            categorySelect.SelectByIndex(1);
+            categorySelect.SelectByIndex(0);
 
             var sumInput = driver.FindElement(By.Name("Sum"));
             sumInput.Clear();

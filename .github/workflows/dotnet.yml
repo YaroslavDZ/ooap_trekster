@@ -60,7 +60,7 @@ jobs:
 
     - name: Run EF Migrations
       env:
-        ConnectionStrings__DefaultConnection: "Host=localhost;Port=5432;Database=treksterdb;Username=postgres;Password=1234;"
+        ConnectionStrings__DefaultConnection: "Host=localhost;Port=5432;Database=treksterdb;Username=postgres;Password=postgres;"
       run: |
         dotnet ef database update \
           --project Trekster_web/Trekster_web/Trekster_web.csproj \
@@ -78,7 +78,7 @@ jobs:
         ASPNETCORE_ENVIRONMENT: Development
         TESTUSER__EMAIL:        ${{ secrets.Email }}
         TESTUSER__PASSWORD:     ${{ secrets.Password }}
-        ConnectionStrings__DefaultConnection: "Host=localhost;Port=5432;Database=treksterdb;Username=postgres;Password=1234;"
+        ConnectionStrings__DefaultConnection: "Host=localhost;Port=5432;Database=treksterdb;Username=postgres;Password=postgres;"
       run: |
         cd publish
         nohup dotnet Trekster_web.dll > ../trekster.log 2>&1 &
@@ -100,7 +100,7 @@ jobs:
       env:
         EMAIL:    ${{ secrets.Email }}
         PASSWORD: ${{ secrets.Password }}
-        ConnectionStrings__DefaultConnection: "Host=localhost;Port=5432;Database=treksterdb;Username=postgres;Password=1234;"
+        ConnectionStrings__DefaultConnection: "Host=localhost;Port=5432;Database=treksterdb;Username=postgres;Password=postgres;"
       run: |
         dotnet restore Testing/TreksterUISeleniumTests/TreksterUISeleniumTests/TreksterUISeleniumTests.csproj
         dotnet test Testing/TreksterUISeleniumTests/TreksterUISeleniumTests/TreksterUISeleniumTests.csproj --verbosity normal

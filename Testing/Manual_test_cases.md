@@ -738,21 +738,6 @@
 
 ---
 
-## Test Case: TC050
-
-| Field         | Details                                                                                      |
-| ------------- | -------------------------------------------------------------------------------------------- |
-| ID            | TC050                                                                                        |
-| Description   | Verify dashboard after account deletion.                                                     |
-| Preconditions | User has one account with transactions.                                                      |
-| Data          | -                                                                                            |
-| Steps         | 1. Delete last account.<br>2. Check dashboard.                                               |
-| Expected      | 1. 'Загалом' becomes empty.<br>2. Transaction button hidden with warning message.            |
-| Actual        | State reverted to initial conditions correctly.                                              |
-| Status        | Pass                                                                                         | 
-
----
-
 # Topic: Dashboard Navigation & UI Test Cases
 
 ## Test Case: TC051
@@ -1485,10 +1470,10 @@
 | ------------- | -------------------------------------------------------------------------------------------- |
 | ID            | TC099                                                                                        |
 | Description   | Перевірка унікальності назви категорії                                                       |
-| Preconditions | Є категорія "Транспорт"                                                                      |
+| Preconditions | Є категорія з назвою "Транспорт"                                                                      |
 | Data          | Назва: "Транспорт"                                                                           |
 | Steps         | 1. Спробувати додати категорію з існуючою назвою                                             |
-| Expected      | Помилка "Категорія з такою назвою вже існує"                                                 |
+| Expected      | Помилка "Категорія з назвою "Транспорт" вже існує"                                                 |
 | Actual        | Відповідає очікуванню                                                                       |
 | Status        | Pass                                                                                         |
 
@@ -1799,7 +1784,7 @@
 | Field         | Details                                                                                      |
 | ------------- | -------------------------------------------------------------------------------------------- |
 | ID            | TC120                                                                                        |
-| Description   | Видалення транзакції витрат                                                                  |
+| Description   | Видалення транзакції типу "Витрата"                                                                 |
 | Preconditions | Є транзакція "Комунальні" на 1500 UAH                                                        |
 | Data          | -                                                                                            |
 | Steps         | 1. Натиснути "Видалити"<br>2. Підтвердити                                                    |
@@ -2057,16 +2042,4 @@
 | Preconditions | Є транзакція витрат "Нерухомість" на 1000000 UAH                                            |
 | Steps         | 1. Перейти на сторінку "Витрати"                                                             |
 | Expected      | Відображається "1 000 000 UAH" (з роздільником тисяч)                                        |
-| Status        | Pass                                                                                         |
-
----
-
-### Test Case: TC152
-| Field         | Details                                                                                      |
-| ------------- | -------------------------------------------------------------------------------------------- |
-| ID            | TC152                                                                                        |
-| Description   | Перевірка відображення дробових сум (BTC)                                                    |
-| Preconditions | Є транзакція витрат "Інвестиції" на 0.005 BTC                                               |
-| Steps         | 1. Перейти на сторінку "Витрати"                                                             |
-| Expected      | Відображається "0.005 BTC" (з точністю до 3 знаків після коми)                              |
 | Status        | Pass                                                                                         |

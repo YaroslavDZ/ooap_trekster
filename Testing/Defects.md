@@ -7,7 +7,7 @@
 | Steps         | 1. Перейти на сторінку "Рахунки"                                                             |
 | Expected      | Відображається кешована версія або повідомлення "Офлайн-режим"                               |
 | Actual        | Відображається порожня сторінка                                                              |
-| Critical      | Critical                                                                                          |
+| Priority      | Low                                                                                          |
 | Status        | Fail                                                                                         |
 
 ---
@@ -21,7 +21,7 @@
 | Steps         | 1. Ввести назву з 101 символом<br>2. Спробувати зберегти                                     |
 | Expected      | Помилка "Максимальна довжина назви - 100 символів"                                           |
 | Actual        | Виводиться повідомлення "Something went wrong"                                               |
-| Critical      | Сritical                                                                                |
+| Priority      | Medium                                                                                       |
 | Status        | Fail                                                                                         |
 
 ---
@@ -35,7 +35,7 @@
 | Steps         | 1. Ввести лише пробіли<br>2. Спробувати зберегти                                             |
 | Expected      | Помилка "Назва не може бути порожньою"                                                       |
 | Actual        | Виводиться повідомлення "Something went wrong"                                               |
-| Critical      | Сritical                                                                                |
+| Priority      | High                                                                                         |
 | Status        | Fail                                                                                         |
 
 ---
@@ -49,7 +49,7 @@
 | Steps         | 1. Ввести мікроскопічну суму<br>2. Спробувати зберегти                                       |
 | Expected      | Помилка "Мінімальна сума - 0.01 UAH"                                                         |
 | Actual        | Створено транзакцію з такою сумою                                                            |
-| Critical      | Not critical                                                                                 |
+| Priority      | Low                                                                                          |
 | Status        | Fail                                                                                         |
 
 ---
@@ -63,7 +63,7 @@
 | Steps         | 1. Швидко двічі натиснути "Додати"                                                           |
 | Expected      | Створюється лише одна транзакція                                                             |
 | Actual        | Сторінка підвисає на певний час, але створюється лише одна транзакція                        |
-| Critical      | Not critical                                                                                 |
+| Priority      | Low                                                                                          |
 | Status        | Fail                                                                                         |
 
 ---
@@ -77,7 +77,7 @@
 | Steps         | 1. Спробувати зберегти без змін                                                              |
 | Expected      | Попередження "Не можна редагувати транзакції старші 3 років"                                 |
 | Actual        | Транзакція відредагована                                                                     |
-| Critical      | Not critical                                                                                 |
+| Priority      | Low                                                                                          |
 | Status        | Fail                                                                                         |
 
 ---
@@ -91,7 +91,7 @@
 | Steps         | 1. Ввести назву з емодзі<br>2. Спробувати зберегти                                           |
 | Expected      | Помилка "Використовуйте лише літери та цифри"                                                |
 | Actual        | Виводиться повідомлення "Something went wrong"                                               |
-| Critical      | Not critical                                                                                 |
+| Priority      | Low                                                                                          |
 | Status        | Fail                                                                                         |
 
 ---
@@ -105,7 +105,7 @@
 | Steps         | 1. Ввести назву "Доходи"<br>2. Спробувати зберегти                                           |
 | Expected      | Помилка "Назва не повинна співпадати з протилежним типом"                                    |
 | Actual        | Створено категорію з назвою доходи                                                           |
-| Critical      | Not critical                                                                                 |
+| Priority      | Low                                                                                          |
 | Status        | Fail                                                                                         |
 
 ---
@@ -119,7 +119,7 @@
 | Steps         | 1. Швидко прокрутити список до кінця під час завантаження                                    |
 | Expected      | Плавна підгрузка без зависань                                                                |
 | Actual        | Список не прокручується до повного завантаження всіх транзакцій                              |
-| Critical      | Not critical                                                                                 |
+| Priority      | Medium                                                                                       |
 | Status        | Fail                                                                                         |
 
 ---
@@ -133,7 +133,7 @@
 | Steps         | 1. Ввести назву з пробілом на початку<br>2. Спробувати зберегти                              |
 | Expected      | Пробіл автоматично видаляється                                                               |
 | Actual        | Створюється категорія з назвою, в якій пробіл на початку                                     |
-| Critical      | Not critical                                                                                 |
+| Priority      | Low                                                                                          |
 | Status        | Fail                                                                                         |
 
 ---
@@ -147,7 +147,7 @@
 | Steps         | 1. Змінити розмір вікна браузера<br>2. Спробувати взаємодіяти з формою                       |
 | Expected      | Форма коректно масштабується                                                                 |
 | Actual        | Форма не масштабується при зміні розміра вікна                                               |
-| Critical      | Not critical                                                                                 |
+| Priority      | Medium                                                                                       |
 | Status        | Fail                                                                                         |
 
 ---
@@ -161,5 +161,5 @@
 | Steps         | 1. Ввести число з комою<br>2. Спробувати зберегти                                            |
 | Expected      | Автоматична заміна коми на точку або помилка "Використовуйте крапку"                         |
 | Actual        | Виводиться повідомлення "Something went wrong"                                               |
-| Critical      | Critical                                                                                     |
+| Priority      | Medium                                                                                       |
 | Status        | Fail                                                                                         |

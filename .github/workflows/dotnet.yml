@@ -72,6 +72,12 @@ jobs:
     - name: Publish Trekster for CI
       run: dotnet publish Trekster_web/Trekster_web/Trekster_web.csproj -c Release -o publish
 
+    - name: Upload artifact for deployment
+      uses: actions/upload-artifact@v4
+      with:
+        name: .net-app
+        path: publish
+
     - name: Serve Trekster
       env:
         ASPNETCORE_URLS:        "http://0.0.0.0:7034"

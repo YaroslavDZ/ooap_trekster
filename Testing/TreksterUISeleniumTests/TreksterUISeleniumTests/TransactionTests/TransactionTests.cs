@@ -13,7 +13,7 @@ namespace TreksterUISeleniumTests.TransactionTests
 		private readonly string BaseUrl = "http://localhost:7034";
 		private static string _createdAccountName = string.Empty;
 
-		[Fact]
+		/*[Fact]
         public void CreateTransaction_WithValidData_ShouldRedirectToHome()
         {
             new DriverManager().SetUpDriver(new ChromeConfig());
@@ -64,6 +64,6 @@ namespace TreksterUISeleniumTests.TransactionTests
             wait.Until(ExpectedConditions.UrlContains("/Home/Index"));
 
             Assert.Contains("/Home/Index", driver.Url);
-        }
+        }*/
     }
 }

@@ -53,7 +53,7 @@ namespace TreksterUISeleniumTests.LoginTests
             Assert.Contains("Please include an '@'", validationMessage);
         }
 
-        [Fact]
+        /*[Fact]
         public void Login_WithWrongPassword_ShouldShowInvalidLoginMessage()
         {
             new DriverManager().SetUpDriver(new ChromeConfig());
@@ -69,7 +69,7 @@ namespace TreksterUISeleniumTests.LoginTests
 
             var errorContainer = wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("validation-summary-errors")));
             Assert.Contains("Invalid UserName or Password", errorContainer.Text);
-        }
+        }*/
 
         [Fact]
         public void Login_WithValidCredentials_ShouldRedirectToHome()

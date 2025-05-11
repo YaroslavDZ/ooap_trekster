@@ -55,6 +55,7 @@ public partial class Program
         builder.Services.AddScoped<IProfitsControllerService, ProfitsControllerService>();
 
         var logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
             .ReadFrom.Configuration(builder.Configuration)
             .CreateLogger();
         builder.Logging.ClearProviders();

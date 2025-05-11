@@ -81,7 +81,7 @@ jobs:
         dotnet sonarscanner begin /k:"${{ secrets.SONAR_PROJECT_KEY }}" \
           /o:"${{ secrets.SONAR_ORGANIZATION }}" \
           /d:sonar.token="${{ secrets.SONAR_SECRET }}" \
-          /d:sonar.cs.opencover.reportsPaths=coverage.xml
+          /d:sonar.cs.opencover.reportsPaths=coverage.xml \
           /d:sonar.coverage.exclusions="**/Migrations/**,**/TreksterTests/**,**/wwwroot/**,**/Startup.cs,**/Program.cs"
 
     - name: Build solution

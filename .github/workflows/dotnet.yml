@@ -12,6 +12,8 @@ permissions:
 
 jobs:
   build-and-test:
+    env:
+      ConnectionStrings__DefaultConnection: ${{ secrets.PROD_CONNECTION_STRING }}
     runs-on: ubuntu-latest
 
     services:

@@ -58,4 +58,10 @@
     <Folder Include="Logs\" />
   </ItemGroup>
 
+    <ItemGroup>
+	    <Content Include="web.config">
+		    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	    </Content>
+    </ItemGroup>
+
 </Project>

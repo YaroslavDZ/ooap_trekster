@@ -82,6 +82,7 @@ jobs:
           /o:"${{ secrets.SONAR_ORGANIZATION }}" \
           /d:sonar.token="${{ secrets.SONAR_SECRET }}" \
           /d:sonar.cs.opencover.reportsPaths=coverage.xml
+          /d:sonar.coverage.exclusions="**/Migrations/**,**/TreksterTests/**,**/wwwroot/**"
 
     - name: Build solution
       run: dotnet build Trekster_web/Trekster_web.sln --no-restore

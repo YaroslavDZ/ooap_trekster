@@ -44,11 +44,6 @@ namespace Trekster_web.Controllers
                 return View(userModel);
             }
 
-            var user = await _userManager.FindByEmailAsync(userModel.Email);
-            await _signInManager.SignInAsync(user, isPersistent: userModel.RememberMe);
-
-            return RedirectToAction(nameof(HomeController.Index), "Home");
-
             var result = await _signInManager.PasswordSignInAsync(userModel.Email, userModel.Password, userModel.RememberMe, false);
             if (result.Succeeded)
             {

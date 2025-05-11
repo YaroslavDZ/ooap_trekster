@@ -173,5 +173,5 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'trekster-app'
-          slot-name: 'Production'
+          slot-name: 'staging'
           package: .

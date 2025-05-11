@@ -83,6 +83,9 @@ jobs:
           /d:sonar.token="${{ secrets.SONAR_SECRET }}" \
           /d:sonar.cs.opencover.reportsPaths=coverage.xml
 
+    - name: Build solution
+      run: dotnet build Trekster_web/Trekster_web.sln --no-restore
+
     - name: Run tests with coverage
       run: |
         coverlet ./Trekster_web/TreksterTests/bin/Debug/net8.0/TreksterTests.dll \

@@ -116,26 +116,33 @@ public partial class Program
 
         if (app.Configuration.GetValue<bool>("SeedTestUser"))
         {
-            await using var scope = app.Services.CreateAsyncScope();
-            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-
-            var email = app.Configuration["TestUser:Email"] ?? "test@user.com";
-            var pwd = app.Configuration["TestUser:Password"] ?? "Test123!";
-
-            if (await userManager.FindByEmailAsync(email) is null)
+            try
             {
-                var user = new User
-                {
-                    UserName = email,
-                    Email = email,
-                    EmailConfirmed = true,
-                };
+                await using var scope = app.Services.CreateAsyncScope();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
-                var res = await userManager.CreateAsync(user, pwd);
-                if (!res.Succeeded)
+                var email = app.Configuration["TestUser:Email"] ?? "test@user.com";
+                var pwd = app.Configuration["TestUser:Password"] ?? "Test123!";
+
+                if (await userManager.FindByEmailAsync(email) is null)
                 {
-                    throw new InvalidOperationException("Seed failed: ");
+                    var user = new User
+                    {
+                        UserName = email,
+                        Email = email,
+                        EmailConfirmed = true,
+                    };
+
+                    var res = await userManager.CreateAsync(user, pwd);
+                    if (!res.Succeeded)
+                    {
+                        Console.WriteLine("SEED FAIL: " + string.Join(", ", res.Errors.Select(e => e.Description)));
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("SEED EXCEPTION: " + ex);
             }
         }
 

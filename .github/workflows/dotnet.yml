@@ -70,6 +70,30 @@ jobs:
           --project Trekster_web/Trekster_web/Trekster_web.csproj \
           --startup-project Trekster_web/Trekster_web/Trekster_web.csproj
 
+    - name: Install coverlet tool
+      run: dotnet tool install --global coverlet.console
+
+    - name: Install SonarScanner
+      run: dotnet tool install --global dotnet-sonarscanner
+
+    - name: Start SonarCloud analysis
+      run: |
+        dotnet sonarscanner begin /k:"${{ secrets.SONAR_PROJECT_KEY }}" \
+          /o:"${{ secrets.SONAR_ORGANIZATION }}" \
+          /d:sonar.token="${{ secrets.SONAR_SECRET }}" \
+          /d:sonar.cs.opencover.reportsPaths=coverage.xml
+
+    - name: Run tests with coverage
+      run: |
+        coverlet ./Trekster_web/TreksterTests/bin/Debug/net8.0/TreksterTests.dll \
+          --target "dotnet" \
+          --targetargs "test Trekster_web/TreksterTests/TreksterTests.csproj --no-build" \
+          -f opencover \
+          -o coverage.xml
+
+    - name: End SonarCloud analysis
+      run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_SECRET }}"
+
     - name: Run unit/integration tests (excluding UI)
       run: dotnet test Trekster_web/Trekster_web.sln --no-build --verbosity normal --filter "FullyQualifiedName!~TreksterUISeleniumTests"
 

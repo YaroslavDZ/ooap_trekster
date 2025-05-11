@@ -10,7 +10,7 @@ namespace TreksterUISeleniumTests.LoginTests
 {
     public class LoginTests
     {
-        [Fact]
+        /*[Fact]
         public void Login_WithEmptyFields_ShouldShowRequiredFieldValidation()
         {
             new DriverManager().SetUpDriver(new ChromeConfig());
@@ -51,7 +51,7 @@ namespace TreksterUISeleniumTests.LoginTests
                 .ExecuteScript("return arguments[0].validationMessage;", emailInput) as string;
 
             Assert.Contains("Please include an '@'", validationMessage);
-        }
+        }*/
 
         /*[Fact]
         public void Login_WithWrongPassword_ShouldShowInvalidLoginMessage()

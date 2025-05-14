@@ -64,7 +64,7 @@ public partial class Program
         builder.Services.AddDbContext<AppDbContext>(options =>
         {
             options.UseNpgsql(
-                builder.Configuration.GetConnectionString("DefaultConnection"),
+                Environment.GetEnvironmentVariable("POSTGRESQLCONNSTR_DefaultConnection") ?? builder.Configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName));
         });
 
@@ -121,8 +121,8 @@ public partial class Program
                 await using var scope = app.Services.CreateAsyncScope();
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
-                var email = app.Configuration["TestUser:Email"] ?? "test@user.com";
-                var pwd = app.Configuration["TestUser:Password"] ?? "Test123!";
+                var email = Environment.GetEnvironmentVariable("EMAIL") ?? app.Configuration["TestUser:Email"] ?? "test@user.com";
+                var pwd = Environment.GetEnvironmentVariable("PASSWORD") ?? app.Configuration["TestUser:Password"] ?? "Test123!";
 
                 if (await userManager.FindByEmailAsync(email) is null)
                 {

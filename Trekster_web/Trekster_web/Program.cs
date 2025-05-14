@@ -64,7 +64,7 @@ public partial class Program
         builder.Services.AddDbContext<AppDbContext>(options =>
         {
             options.UseNpgsql(
-                Environment.GetEnvironmentVariable("POSTGRESQLCONNSTR_DefaultConnection") ?? builder.Configuration.GetConnectionString("DefaultConnection"),
+                Environment.GetEnvironmentVariable("DefaultConnection") ?? builder.Configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName));
         });
 

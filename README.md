@@ -46,7 +46,7 @@ This document outlines the Continuous Integration (CI) and Continuous Deployment
 2. **Login to Azure using service principal credentials**
 3. **Deploy to Azure Web App**  
    - Target app name: `trekster-app`  
-   - **Deployment slot:** `stage`
+   - **Deployment slot:** `staging`
 
 ---
 
